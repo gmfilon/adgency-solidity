@@ -41,6 +41,8 @@ contract Agreement{
     address public recipient; 
     // Se define en AgreementFactory es el wallet donde se blockea el dinero del cliente
     address public blockedAccount; 
+       // Se define en AgreementFactory es el wallet del cliente
+    address public payer; 
 
 
     function toDeliverProject(uint _toDayDate) public {
@@ -55,12 +57,14 @@ contract Agreement{
 
     function toRejected(uint _toDayDate) public {
     // Por defecto será false, se tiene que llamar a esta función desde otro sitio cuando 
-	// 'toDayDate' = 'rejectedLimitDate'. En caso de que lo haya rechazado (esta información nos llega desde un oráculo) -> rejected === true
+	// 'toDayDate' = 'rejectedLimitDate'. En caso de que lo haya rechazado (esta información nos llega desde un oráculo) -> rejected === true -> se envia a solucionador de conflictos
     }
 
-    function toPayTheProject(uint _toDayDate) public payable {
+    function toResolveTheProject(uint _toDayDate) public payable {
     // Se tiene que llamar a esta función desde otro sitio cuando 'toDayDate' = 'rejectedLimitDate'
 	// Si `delivered===true`, `outOfDate===false` `rejected===false`, se ejecuta la transacción con valor 'amount' de la cuenta `blockedAccount` a la cuenta `recipient` y se setea `paid===true` 
+    // Si `outOfDate===true` se devuelve el dinero a la cuenta del cliente 'payer'
+    // Si `rejected===true` se sigue el dinero retenido y se eleva a un solucionador de conflictos
     }
 
 }
