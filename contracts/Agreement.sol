@@ -8,7 +8,6 @@ contract Agreement{
 //        paymentDay = _paymentDay;
 //    }
 
-// las fechas se trabajan en 
     struct Project{
         // Se define en AgreementFactory es el Id del proyecto
         uint agreementId;
